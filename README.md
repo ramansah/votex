@@ -23,7 +23,7 @@ end
 Specify your root project's repo in config
 ```
 config :votex, Votex.DB,
-	repo: MyApp.Repo
+  repo: MyApp.Repo
 ```
 Votex needs a table in DB to store votes information
 Install votex and generate votex schema migration
@@ -37,13 +37,13 @@ mix ecto.migrate
 ##### Configure Models
 ```
 defmodule User do
-	use Ecto.Schema
-    use Votex.Voter
+  use Ecto.Schema
+  use Votex.Voter
 end
 
 defmodule Post do
-	use Ecto.Schema
-	use Votex.Votable
+  use Ecto.Schema
+  use Votex.Votable
 end
 ```
 #### Vote / Unvote
