@@ -1,8 +1,8 @@
 
 # Votex
 
-**Implements vote / like / follow functionality for Ecto models**
-> Inspired from [acts_as_votable][acts_as_votable] in ROR
+**Implements vote / like / follow functionality for Ecto models in Elixir**
+> Inspired from [Acts as Votable][acts_as_votable] in ROR
 
 [acts_as_votable]: https://github.com/ryanto/acts_as_votable
 
@@ -10,6 +10,7 @@
 
   - Any model can be voted
   - Any model can vote
+  - Supports self referential voting
   - Easy to understand syntax
 
 ### Installation
@@ -17,7 +18,7 @@
 Add Votex to your project dependencies `mix.exs`
 ```
 defp deps do
-  [{:votex, "~> 0.1.0"}]
+  [{:votex, "~> 0.2.0"}]
 end
 ```
 Specify your root project's repo in config
@@ -70,4 +71,15 @@ post |> Post.votes_for
 ]
 
 post |> Post.unvote_by user
+```
+#### Self Referential Vote
+```
+defmodule User do
+  use Ecto.Schema 
+  use Votex.Voter
+  user Votex.Votable
+end
+
+user2 |> User.vote_by user1
+# {:ok, _}
 ```
