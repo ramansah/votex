@@ -20,7 +20,7 @@ Add Votex to your project dependencies `mix.exs`
 
 ``` elixir
 defp deps do
-  [{:votex, "~> 0.2.0"}]
+  [{:votex, "~> 0.3.0"}]
 end
 ```
 
@@ -95,3 +95,47 @@ user2 |> User.vote_by user1
 # {:ok, _}
 ```
 
+### Cleanup
+
+Since polymorphic associations are not supported in Ecto and callbacks are deprecated, orphan votes need to be cleared when a parent entity is destroyed. Therefore, you need to call cleanup_votes when you delete a Voter or a Votable record.
+
+``` elixir
+# Delete user
+Repo.delete(user) |> User.cleanup_votes
+
+# Delete post
+Repo.delete(post) |> Post.cleanup_votes
+```
+
+### Cache Support
+
+Some fields like total number of votes on a post can be cached in posts table to avoid extra calls to DB. Votex will update the field if present in schema.
+
+``` elixir
+defmodule Post do
+  use Ecto.Schema
+  use Votex.Votable
+
+  schema "posts" do
+    field(:cached_votes_for_total, :integer)
+  end
+
+  @fields ~w(cached_votes_for_total)a
+
+  # Publicly accessible changeset for Votex to update field
+  def changeset(post, attrs) do
+    post
+    |> cast(attrs, @fields)
+    |> validate_required(@fields)
+  end
+end
+```
+
+The posts table will track total votes from now on
+
+``` elixir
+post |> Post.vote_by user
+post = Repo.get(Post, 1)
+post.cached_votes_for_total
+# 5
+```

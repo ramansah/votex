@@ -24,8 +24,11 @@ defmodule Mix.Tasks.Votex.Gen.Migration do
         |> Application.app_dir()
         |> Path.join("priv/templates/migration.exs.eex")
 
-      generated_file = EEx.eval_file(source_path,
-                                     module_prefix: app_module())
+      generated_file =
+        EEx.eval_file(source_path,
+          module_prefix: app_module()
+        )
+
       target_file = Path.join(path, "#{timestamp()}_votex.exs")
       create_directory(path)
       create_file(target_file, generated_file)
