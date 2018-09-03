@@ -20,7 +20,7 @@ Add Votex to your project dependencies `mix.exs`
 
 ``` elixir
 defp deps do
-  [{:votex, "~> 0.3.0"}]
+  [{:votex, "~> 0.2.0"}]
 end
 ```
 
@@ -94,3 +94,4 @@ end
 user2 |> User.vote_by user1
 # {:ok, _}
 ```
+
