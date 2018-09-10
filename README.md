@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://travis-ci.org/ramansah/votex">
-    <img src="https://api.travis-ci.org/ramansah/votex.svg?branch=develop" alt="travis" title="build-status"/>
+    <img src="https://api.travis-ci.org/ramansah/votex.svg" alt="travis" title="build-status"/>
   </a>
 </p>
 
