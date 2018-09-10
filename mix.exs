@@ -27,7 +27,8 @@ defmodule Votex.MixProject do
   defp deps do
     [
       {:ex_doc, "~> 0.19.1", only: :dev},
-      {:ecto, "~> 2.1"}
+      {:ecto, "~> 2.1"},
+      {:inch_ex, only: [:docs, :dev]}
     ]
   end
 
@@ -42,13 +43,14 @@ defmodule Votex.MixProject do
   end
 
   defp description() do
-    "Implements vote / like / follow functionality for Ecto models.
+    "Implements vote / like / follow functionality for Ecto models in Elixir.
     Inspired from Acts as Votable"
   end
 
   defp docs() do
     [
       main: "readme",
+      source_url: "https://github.com/ramansah/votex",
       extras: ["README.md"]
     ]
   end

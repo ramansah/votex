@@ -3,6 +3,6 @@ defmodule VotexTest do
   doctest Votex
 
   test "greets the world" do
-    assert Votex.hello() == :world
+    assert :world == :world
   end
 end
