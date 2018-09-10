@@ -1,7 +1,5 @@
 language: elixir
-
-otp_release:
-  - 21
+elixir: '1.7'
 
 before_install:
   - mix local.hex --force
