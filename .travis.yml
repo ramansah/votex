@@ -1,6 +1,7 @@
 language: elixir
 
 before_install:
+  - mix local.hex --force
   - mix deps.get
 
 script:
